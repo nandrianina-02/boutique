@@ -7,10 +7,9 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -87,6 +86,8 @@ def create_produits(produit: ProduitsCreate):
 @app.get("/produits/")
 def get_produits():
     db = SessionLocal()
-    produits = db.query(Produits).all()
-    db.close
-    return produits
+    try:
+        produits = db.query(Produits).all()
+        return produits
+    finally:
+        db.close()
