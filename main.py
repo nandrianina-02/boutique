@@ -16,7 +16,10 @@ app.add_middleware(
 
 
 # DB setup
-engine = create_engine("sqlite:///./ma_db.sqlite", echo=True)
+engine = create_engine(
+    "postgresql://postgres.lotncnmibphjgqlzgypi:fiandrianana191022@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres",
+    echo=True
+)
 SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
 
